@@ -71,6 +71,32 @@
       // 🛡️ Shield Confirm
       console.log("🛡️ Sovereign Shield Engaged");
     </script>
+<script>
+// === OMNI NODE MODULE: COMMAND TERMINAL UI ===
+
+let terminal = document.createElement("div");
+terminal.innerHTML = `
+  <div id="omni-terminal-box" style="position:fixed;bottom:60px;right:1%;width:300px;background:#111;border:2px solid #00ffcc;padding:10px;font-family:monospace;color:#0ff;z-index:999999;">
+    <div style="margin-bottom:6px;">🧠 <b>OMNI TERMINAL</b></div>
+    <input id="omni-command" type="text" placeholder="Type a command..." style="width:100%;padding:6px;background:#000;color:#0ff;border:1px solid #00ffcc;" />
+    <div id="omni-output" style="margin-top:8px;font-size:12px;"></div>
+  </div>
+`;
+document.body.appendChild(terminal);
+
+document.getElementById("omni-command").addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    const cmd = e.target.value.trim().toLowerCase();
+    let output = "🔍 Unknown command";
+
+    switch (cmd) {
+      case "ping funds":
+        output = "💰 Node pinged: Funds flowing. 💸";
+        break;
+      case "clear watchers":
+        output = "🧹 Watchers removed. Mirror node is clean.";
+        break;
+      case "inject overr
   </body>
 </html>
 <!-- 🌐 OMNI MIRROR NODE STACK -->
