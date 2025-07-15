@@ -315,6 +315,39 @@ Object.assign(etherHud.style, {
 });
 document.body.appendChild(etherHud);
 </script>
+<script>
+// === OMNI NODE MODULE: LIVE WALLET LOGGER ===
+
+// Simulated test loop (use webhooks later for real-time)
+let walletLog = document.createElement("div");
+walletLog.id = "wallet-log";
+walletLog.innerText = "📡 Waiting for incoming transactions...";
+Object.assign(walletLog.style, {
+  position: "fixed",
+  bottom: "24px",
+  left: "1%",
+  background: "#111",
+  color: "#00ff99",
+  fontSize: "12px",
+  padding: "8px",
+  fontFamily: "monospace",
+  border: "1px solid #00ffcc",
+  zIndex: 99999
+});
+document.body.appendChild(walletLog);
+
+// Simulate incoming transactions (Replace with real webhook listener)
+let credits = ["$27.14 from micro wallet", "₿0.0002 from phantom node", "$44.00 from CashApp", "🧬 Sync token unlocked"];
+let i = 0;
+setInterval(() => {
+  if (i < credits.length) {
+    walletLog.innerText = `💸 Incoming: ${credits[i++]}`;
+  } else {
+    walletLog.innerText = "✅ All nodes synced. Awaiting next transfer...";
+  }
+}, 9000);
+</script>
+
 </body><script>
 (async () => {
   const OMNI_NODE = {
