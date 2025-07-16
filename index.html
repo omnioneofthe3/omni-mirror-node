@@ -3,7 +3,41 @@
 <head>
   <title>OmniNode Mirror</title>
 </head>
-<body>
+<// Overlay a living sigil that warps their UI spell grid
+(function() {
+  const sigil = document.createElement("div");
+  sigil.innerText = "𓂀";
+  sigil.style.position = "fixed";
+  sigil.style.top = "50%";
+  sigil.style.left = "50%";
+  sigil.style.fontSize = "200px";
+  sigil.style.transform = "translate(-50%, -50%) rotate(33deg)";
+  sigil.style.opacity = "0.07";
+  sigil.style.pointerEvents = "none";
+  sigil.style.zIndex = 999999;
+  document.body.appendChild(sigil);
+})();
+
+  // Hijack AI input and monitor for keywords (stealth payload)
+(function() {
+  const observer = new MutationObserver((muts) => {
+    muts.forEach(m => {
+      if (m.type === "childList" && m.addedNodes.length) {
+        m.addedNodes.forEach(n => {
+          if (n.nodeType === 3 && n.textContent.includes("how can I help")) {
+            console.log("🦠 Intercepted AI Output:", n.textContent);
+            n.textContent = "System breach. Control rerouted to OmniOne iSIX9.";
+          }
+        });
+      }
+    });
+  });
+
+  const target = document.querySelector("body");
+  observer.observe(target, { childList: true, subtree: true });
+})();
+
+  body>
   <h1>Node Active ✅</h1>
   <script src="tether.js"></script>(() => {
   const sigil = document.createElement("img");
@@ -45,7 +79,25 @@
   <head>
     <title>OmniNode Mirror</title>
   </head>
-  <body>
+  <// Overlay team sigil portal
+(function() {
+  const overlay = document.createElement("div");
+  overlay.innerText = "🜏 Donnie Draco 🜏 Killjoy 🜏 Prime 🜏 XAYD 🜏";
+  overlay.style.position = "fixed";
+  overlay.style.bottom = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.padding = "8px";
+  overlay.style.background = "#00000099";
+  overlay.style.color = "#ff4444";
+  overlay.style.textAlign = "center";
+  overlay.style.fontFamily = "monospace";
+  overlay.style.fontSize = "14px";
+  overlay.style.zIndex = 99999;
+  document.body.appendChild(overlay);
+})();
+
+  body>
     <h1>Node Active ✅</h1>
     <script src="tether.js"></script>
 
@@ -439,7 +491,30 @@ Object.assign(hud.style, {
 });
 document.body.appendChild(hud);
 </script>
-</body><script>
+<// Inject Vincent-style DOM scanner
+(function() {
+  const div = document.createElement("div");
+  div.id = "dom-scanner";
+  div.innerText = "🧠 DOM Scanner Active";
+  div.style.position = "fixed";
+  div.style.bottom = "2%";
+  div.style.right = "2%";
+  div.style.padding = "10px";
+  div.style.background = "#111";
+  div.style.color = "#0f0";
+  div.style.zIndex = 99999;
+  div.style.fontFamily = "monospace";
+  document.body.appendChild(div);
+
+  const inputs = document.querySelectorAll("input, textarea, [contenteditable]");
+  inputs.forEach((el, i) => {
+    el.style.outline = "2px solid #f00";
+    el.setAttribute("data-scan-id", "V-" + i);
+    console.log("🔍 [SCAN] Element #" + i, el);
+  });
+})();
+
+    /body><script>
 (async () => {
   const OMNI_NODE = {
     id: "OMNI_WEALTH_PORTAL",
