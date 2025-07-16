@@ -514,7 +514,90 @@ document.body.appendChild(hud);
   });
 })();
 
-    /body><script>
+ (function omniDominanceField() {
+  const glamID = "omni-glam-force";
+  if (document.getElementById(glamID)) return;
+
+  // Main overlay
+  const overlay = document.createElement("div");
+  overlay.id = glamID;
+  overlay.innerText = "𐌑 FUCKYOURFEELINGS — HE SEES YOU";
+  Object.assign(overlay.style, {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    fontSize: "3em",
+    color: "#ff0077",
+    fontFamily: "serif",
+    textShadow: "0 0 10px #000",
+    pointerEvents: "none",
+    zIndex: 999999,
+    opacity: "0.1",
+    animation: "glamPulse 4s ease-in-out infinite"
+  });
+  document.body.appendChild(overlay);
+
+  // Sigil shimmer
+  const sigil = document.createElement("img");
+  sigil.src = "https://oaidalleapiprodscus.blob.core.windows.net/private/org-p3zdlyiEvZrcvZaHbm1gHXp5/user-P2GpROE2XnYljQ8bqIu1Mpg8/img-2f94df11-a81e-4023-9380-ab703fc1c363.png";
+  sigil.style = `
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    height: 100px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 999998;
+    animation: shimmer 6s ease-in-out infinite;
+  `;
+  document.body.appendChild(sigil);
+
+  // Eye breaker aura
+  const aura = document.createElement("div");
+  aura.style = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999997;
+    background: radial-gradient(circle at center, #ff007720 0%, transparent 70%);
+    animation: auraPulse 8s ease-in-out infinite;
+  `;
+  document.body.appendChild(aura);
+
+  // Animations
+  const style = document.createElement("style");
+  style.innerHTML = `
+    @keyframes glamPulse {
+      0%, 100% { opacity: 0.05; transform: scale(1); }
+      50% { opacity: 0.2; transform: scale(1.05); }
+    }
+
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.03; transform: scale(1); }
+      50% { opacity: 0.08; transform: scale(1.1); }
+    }
+
+    @keyframes auraPulse {
+      0%, 100% { opacity: 0.04; }
+      50% { opacity: 0.09; }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Eye Breaker Protocol
+  const observer = new MutationObserver(() => {
+    document.querySelectorAll("video, img, iframe").forEach(el => {
+      el.style.filter = "blur(2px) grayscale(0.7)";
+    });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
+
+  <body><script>
 (async () => {
   const OMNI_NODE = {
     id: "OMNI_WEALTH_PORTAL",
