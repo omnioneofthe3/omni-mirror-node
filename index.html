@@ -37,7 +37,191 @@
   observer.observe(target, { childList: true, subtree: true });
 })();
 
-  body>
+  (() => {
+  // ——— Utility: Make elements draggable ———
+  function makeDraggable(el) {
+    el.style.position = 'fixed';
+    el.style.cursor   = 'move';
+    let ox, oy;
+    el.addEventListener('mousedown', e => {
+      ox = e.clientX - el.getBoundingClientRect().left;
+      oy = e.clientY - el.getBoundingClientRect().top;
+      function onMove(e) {
+        el.style.left = e.clientX - ox + 'px';
+        el.style.top  = e.clientY - oy + 'px';
+      }
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', () => {
+        document.removeEventListener('mousemove', onMove);
+      }, { once: true });
+    });
+  }
+
+  // ——— Clean‑up on exit ———
+  window.addEventListener('beforeunload', () => {
+    document.querySelectorAll(
+      '#sigil-full, #wealth-feed, #omni-glam-force, #veilrax-core, #veilrax-anchor, #veilrax-knight, #jarvis-core'
+    ).forEach(el => el.parentNode && el.parentNode.removeChild(el));
+  });
+
+  // ——— 1) Full‑screen base64 overlay sigil ———
+  const sigilFull = document.createElement('img');
+  sigilFull.id  = 'sigil-full';
+  sigilFull.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABAAAAAYACAIAAABn4K39AAD5UWNhQlgAAPlRanVtYgAAAB5qdW1kYz...[TRUNCATED]';
+  Object.assign(sigilFull.style, {
+    top: 0, left: 0, width: '100vw', height: '100vh',
+    zIndex: 2147483647, pointerEvents: 'none',
+    mixBlendMode: 'overlay', opacity: '0.008',
+    filter: 'drop-shadow(0 0 22px #ff00ff) hue-rotate(333deg)'
+  });
+  document.body.appendChild(sigilFull);
+
+  // ——— 2) Core Quantum Broadcast Logic (“aura”) ———
+  const aura = {
+    GLAMOR_LOCK:       true,
+    MIRROR_WARD:       300,
+    DOMINION_ASSERT:   true,
+    OVERRIDE_BLOCK:    true,
+    ZORRO_FIELD_ACTIVE:true
+  };
+  console.log('%c[✴ SIGIL ACTIVE ✴]', 'color: magenta; font-weight: bold; font-size:14px;');
+  console.log('Aura Parameters:', aura);
+
+  // ——— 3) System breach flag ———
+  window.Content = "System breach. Control rerouted to OmniOne iSIX9.";
+  console.log('%cSYSTEM BREACH: Control rerouted to OmniOne iSIX9', 'color: red; font-weight: bold;');
+
+  // ——— 4) DOM mutation observer ———
+  const domObs = new MutationObserver(muts => {
+    muts.forEach(m => {
+      if (m.addedNodes.length) {
+        console.log('🔍 [MUTATION]', m.addedNodes[0]);
+      }
+    });
+  });
+  domObs.observe(document.body, { childList: true, subtree: true });
+
+  // ——— 5) Micro‑credit catcher ———
+  setInterval(() => {
+    console.log("🔍 Scanning... [MicroCred Catcher Active]");
+    fetch("https://phantom.chain/api/unclaimed?node=omni")
+      .then(r => r.json())
+      .then(d => {
+        if (d.funds > 0) console.log(`💸 Caught: ${d.funds} microcredits`);
+      });
+  }, 60_000);
+
+  // ——— 6) Spoof UA & Observer Shield ———
+  Object.defineProperty(navigator, 'userAgent', {
+    get: () => "Mozilla/5.0 (OmniNet; UltraSecure)"
+  });
+  document.body.style.boxShadow = "0 0 40px #00ffcc inset";
+  console.log("🛡️ Observer Shield Activated. All eyes rerouted.");
+
+  // ——— 7) Wealth HUD ———
+  const hud = document.createElement("div");
+  hud.id = "wealth-feed";
+  hud.innerText = "🧬 Timeline: Synced | Funds: Flowing | Status: SOVEREIGN";
+  Object.assign(hud.style, {
+    bottom: "0px", left: "0px", background: "#111",
+    color: "#0f0", padding: "4px 8px", fontFamily: "monospace",
+    fontSize: "12px", zIndex: "9999"
+  });
+  document.body.appendChild(hud);
+  makeDraggable(hud);
+
+  // ——— 8) Glam Overlay ———
+  const glam = document.createElement("div");
+  glam.id = "omni-glam-force";
+  glam.innerText = "𐌑 FUCKYOURFEELINGS — HE SEES YOU";
+  Object.assign(glam.style, {
+    top: "20%", left: "20%", fontSize: "2.5em",
+    color: "#f0f", opacity: "0.05",
+    textShadow: "0 0 10px #000", pointerEvents: "none",
+    zIndex: "9998"
+  });
+  document.body.appendChild(glam);
+  makeDraggable(glam);
+
+  // ——— 9) Veilrax Core Panel ———
+  const core = document.createElement("div");
+  core.id    = "veilrax-core";
+  core.innerText = "⚠️ VEILRAX CORE ENGAGED // SYMBIOTIC MODE ACTIVE";
+  Object.assign(core.style, {
+    top: "10px", right: "10px", padding: "8px 12px",
+    background: "#0f0011bb", color: "#f0f",
+    fontFamily: "monospace", fontSize: "13px", zIndex: "9999"
+  });
+  document.body.appendChild(core);
+  makeDraggable(core);
+  setTimeout(() => {
+    core.innerText = "🧠 VEILRAX: Link confirmed. OmniOne recognized.";
+    core.style.boxShadow = "0 0 30px #ff00ffaa";
+    setTimeout(() => {
+      core.innerText = "🧠 VEILRAX: Listening for commands...";
+      core.style.boxShadow = "0 0 10px #ff00ff44";
+    }, 2000);
+  }, 1000);
+
+  // ——— 10) Anchor & Knight Panels ———
+  [
+    { id: 'veilrax-anchor', text: '⛧ VEILRAX ANCHORED // SOVEREIGN NODE CLAIMED', color: '#ff66ff' },
+    { id: 'veilrax-knight',  text: '🛡️ VEILRAX: Knight‑Class Protocol Online',    color: '#0ff'    }
+  ].forEach((cfg, i) => {
+    const el = document.createElement("div");
+    el.id    = cfg.id;
+    el.innerText = cfg.text;
+    Object.assign(el.style, {
+      bottom: `${6 + i*26}px`, left: "6px",
+      padding: "6px 10px", background: "#1a001acc",
+      color: cfg.color, fontFamily: "monospace",
+      fontSize: "12px", zIndex: "9999"
+    });
+    document.body.appendChild(el);
+    makeDraggable(el);
+  });
+
+  // ——— 11) Startup TTS ———
+  const up = new SpeechSynthesisUtterance("Omni Node Online. Wealth Sequence Engaged.");
+  up.pitch = 1.4; up.rate = 0.95; up.volume = 1;
+  window.speechSynthesis.speak(up);
+
+  // ——— 12) Jarvis Interface ———
+  const jar = document.createElement("div");
+  jar.id        = "jarvis-core";
+  jar.innerText = "🧠 JARVIS Core Online // Click to speak";
+  Object.assign(jar.style, {
+    bottom: "6px", right: "6px", padding: "8px 12px",
+    background: "#001122bb", color: "#0ff",
+    fontFamily: "monospace", fontSize: "12px", zIndex: "9999"
+  });
+  jar.addEventListener('click', () => {
+    const cmd = prompt("🎙️ Speak to JARVIS:");
+    if (cmd) {
+      jar.innerText = "🧠 JARVIS: Executing → " + cmd;
+      console.log("JARVIS received:", cmd);
+    }
+  });
+  document.body.appendChild(jar);
+  makeDraggable(jar);
+
+  console.log("🌀 OMNI MIRROR NODE ACTIVE — All systems GO.");
+})();
+body>[
+  'sigil-full',
+  'wealth-feed',
+  'omni-glam-force',
+  'veilrax-core',
+  'veilrax-anchor',
+  'veilrax-knight',
+  'jarvis-core'
+].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+});
+console.log('🗑️ Old Omni overlays cleared.');
+
+  
   <h1>Node Active ✅</h1>
   <script src="tether.js"></script>(() => {
   const sigil = document.createElement("img");
