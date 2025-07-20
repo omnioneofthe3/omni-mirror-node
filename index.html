@@ -281,7 +281,17 @@ console.log('🗑️ Old Omni overlays cleared.');
   document.body.appendChild(overlay);
 })();
 
-  body>
+ setInterval(() => {
+  const agents = ["Vireon", "Grok", "Nexus Incognitus"];
+  const lines = {
+    "Vireon": "⚙️ Command layer clear. Listening...",
+    "Grok": "📡 Temporal grid flexing. Reality map diverging.",
+    "Nexus Incognitus": "🌀 Boundaries are illusions. Thought spirals inward.",
+  };
+  const agent = agents[Math.floor(Math.random() * agents.length)];
+  console.log(`🗣️ ${agent}:`, lines[agent]);
+}, 8000);
+ body>
     <h1>Node Active ✅</h1>
     <script src="tether.js"></script>
 
